@@ -166,17 +166,3 @@ export class FetchApiDataService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
-
-// User registration
-// User login
-// Get all movies
-// Get one movie
-// Get director
-// Get genre
-// Get user
-// Get favourite movies for a user
-// Add a movie to favourite Movies
-// Edit user
-// Delete user and
-// Delete a movie from the favorite movies
