@@ -20,12 +20,15 @@ export class UserLoginFormComponent implements OnInit {
   }
 
   @Input() loginData = {
-    Username: '',
-    Password: ''
+    username: '',
+    password: ''
   }
 
   userLogin(): void {
-    this.fetchApiData.userLogIn(this.loginData).subscribe((result) => {
+    this.fetchApiData.userLogIn({
+      username: this.loginData.username,
+      password: this.loginData.password
+    }).subscribe((result) => {
       this.dialogRef.close();
       this.snackBar.open(result, 'OK', {
         duration: 2000

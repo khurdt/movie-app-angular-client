@@ -145,6 +145,7 @@ export class FetchApiDataService {
 
   private extractResponseUserToken(res: any): any {
     const data = res;
+    console.log(data);
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', data.user.username);
     return data || {};

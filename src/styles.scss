@@ -41,9 +41,38 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.main-page {
-  padding-top: 200px;
+.login-image {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  color: #fff;
+  background-image: url("./assets/images/login-background.jpg");
+  background-size: 100%;
+  background-size: cover;
+}
+
+.welcome-card {
+  margin: auto;
+  width: 250px;
+  height: 100px;
   text-align: center;
+  margin-top: 250px;
+}
+
+.welcome-title {
+  padding: 5px;
+  margin-left: 15px;
+  margin-right: auto;
+}
+
+.freepick {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  opacity: 0.3;
+  font-size: 10px;
 }
 
 .log-reg-button {
