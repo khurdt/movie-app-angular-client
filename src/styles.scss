@@ -96,3 +96,39 @@ body {
 .log-reg-input {
   width: 220px
 }
+
+.movie-grid {
+  background-color: #FFF;
+  margin: auto;
+}
+
+.grid-card {
+  width: 400px;
+  height: 500px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.mat-card {
+  width: 250px;
+  height: 500px;
+  padding-bottom: 40px;
+  margin-bottom: 100px;
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: #dbdada;
+}
+
+.card-title {
+  text-align: left;
+}
+
+.card-img {
+  height: 350px;
+  width: calc(100%);
+  min-width: 200px;
+}
+
+.see-more-button {
+  margin-left: 20px;
+}
