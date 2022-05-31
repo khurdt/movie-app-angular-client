@@ -42,6 +42,8 @@ body {
 }
 
 .login-image {
+  display: flex;
+  justify-content: center;
   position: absolute;
   left: 0;
   right: 0;
@@ -54,11 +56,11 @@ body {
 }
 
 .welcome-card {
-  margin: auto;
+  margin-top: 250px;
   width: 250px;
   height: 100px;
+  max-height: 100px;
   text-align: center;
-  margin-top: 250px;
 }
 
 .welcome-title {
@@ -131,4 +133,53 @@ body {
 
 .see-more-button {
   margin-left: 20px;
+}
+
+.login-card {
+  height: fit-content;
+}
+
+.tab button.active {
+  border-radius: 0%;
+  border-bottom: 2px solid red;
+}
+
+.menu-bar.mat-menu-panel {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+  width: 200px;
+}
+
+.profile-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-input-card {
+  height: fit-content;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  max-width: 400px;
+  min-width: 300px;
+}
+
+.favorite-movies-card {
+  height: fit-content;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  max-width: 700px;
+  margin: auto;
+}
+
+@media all and (max-width: 930px) {
+  .profile-container {
+    grid-template-columns: 1fr;
+  }
 }

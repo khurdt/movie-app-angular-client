@@ -1,3 +1,6 @@
+<mat-form-field style="display: flex; justify-content: center; margin-top: 20px;">
+    <input matInput [(ngModel)]="searchInquiry" placeholder="search" style="width: 400px;" type="text" />
+</mat-form-field>
 <mat-grid-list class="movie-grid" [cols]="mybreakpoint" rowHeight="650px" (window:resize)="handleGridSize($event)">
     <mat-grid-tile class="grid-card" *ngFor="let movie of movies; let i=index;">
         <mat-card class="mat-card" style="box-shadow: 3px 3px 10px 5px rgba(27, 27, 27, 0.3);">
@@ -10,13 +13,15 @@
                 <img class="card-img" src={{movie.imagePath}} />
                 <mat-card-subtitle style="margin: 0px;text-align: center;">Directed by: {{movie.director.name}}
                 </mat-card-subtitle>
-                <mat-card-actions style="display: flex; margin-left:40px;">
+                <mat-card-actions style="display: flex; margin-left:50px;">
                     <button mat-raised-button color="primary" class="see-more-button">
                         See More
                     </button>
-                    <div>
-                        <mat-icon style="margin-left: 20px; padding: 10px; cursor: pointer;">favorite_border</mat-icon>
-                    </div>
+                    <button mat-icon-button style="margin-left: 20px;">
+                        <mat-icon>
+                            favorite_border
+                        </mat-icon>
+                    </button>
                 </mat-card-actions>
             </mat-card-content>
         </mat-card>

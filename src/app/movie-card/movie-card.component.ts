@@ -15,6 +15,7 @@ export class MovieCardComponent implements OnInit {
   small: boolean = (window.innerWidth <= 600);
   medium: boolean = (window.innerWidth >= 601 && window.innerWidth <= 900);
   large: boolean = (window.innerWidth >= 901 && window.innerWidth <= 1400);
+  searchInquiry: string = '';
 
   ngOnInit(): void {
     this.getMovies();

@@ -1,0 +1,67 @@
+<div class="profile-container">
+    <mat-card class="profile-input-card">
+        <mat-card-header class="log-reg-title">
+            <mat-card-title>Profile</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="log-reg-form">
+                <div>
+                    <mat-form-field class="log-reg-input">
+                        <input matInput [(ngModel)]="userData.username" placeholder="Username" type="text"
+                            name="Username" required />
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="log-reg-input">
+                        <input matInput [(ngModel)]="userData.password" placeholder="Password" type="password"
+                            name="Password" required />
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="log-reg-input">
+                        <input matInput [(ngModel)]="userData.email" type="email" placeholder="Email" name="Email"
+                            required />
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="log-reg-input">
+                        <input matInput [(ngModel)]="userData.birthday" type="date" placeholder="Birthday (optional)"
+                            name="Birthday" />
+                    </mat-form-field>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-actions style="display: flex;justify-content:space-between;">
+            <div class="log-reg-button">
+                <button mat-raised-button (click)="openDeleteDialog()" color="error">Delete Profile</button>
+            </div>
+            <div class="log-reg-button">
+                <button mat-raised-button (click)="updateUser()" color="primary">Update</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card class="favorite-movies-card">
+        <mat-card-header class="log-reg-title">
+            <mat-card-title>Favorite Movies</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="favorite-movies-grid">
+                <mat-card style="box-shadow: 3px 3px 10px 5px rgba(27, 27, 27, 0.3); width: 115px; height: fit-content;"
+                    *ngFor="let movie of favMovies; let i=index;">
+                    <mat-card-content>
+                        <mat-card-subtitle style="margin: 0px;text-align: center;min-height: 40px;">
+                            {{movie.title}}
+                        </mat-card-subtitle>
+                        <img width="100" height="150" style="margin-left:7px;" src={{movie.imagePath}} />
+                        <mat-card-actions style="display: flex;justify-content: center;">
+                            <button mat-raised-button color="error" class="see-more-button">
+                                Delete
+                            </button>
+                        </mat-card-actions>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <mat-card-subtitle style="text-align: center;">No Favorite Movies</mat-card-subtitle>
+        </mat-card-content>
+    </mat-card>
+</div>
