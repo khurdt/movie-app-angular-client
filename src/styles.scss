@@ -153,7 +153,7 @@ body {
 
 .profile-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   margin: 0;
   padding: 0;
 }
@@ -178,8 +178,24 @@ body {
   margin: auto;
 }
 
-@media all and (max-width: 930px) {
+.favorite-movies-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: center;
+}
+
+@media all and (min-width: 601) and (max-width: 930px) {
   .profile-container {
     grid-template-columns: 1fr;
+  }
+
+  .favorite-movies-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media all and (max-width: 600px) {
+  .favorite-movies-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }

@@ -2,8 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
-import { HIGH_CONTRAST_MODE_ACTIVE_CSS_CLASS } from '@angular/cdk/a11y/high-contrast-mode/high-contrast-mode-detector';
+import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-profile',
@@ -16,68 +15,75 @@ export class ProfileComponent implements OnInit {
     public dialog: MatDialog,
     public snackBar: MatSnackBar) { }
 
-  @Input() userData = {
-    username: '',
-    password: '',
-    email: '',
-    birthday: '',
-  }
-  favoriteMovies: any[] = [];
+
+  username: string = '';
+  email: string = '';
+  birthday: any = '';
+  favoriteMoviesId: any[] = [];
   movies: any[] = [];
-  favMovies: any[] = this.movies.map((movie) => movie._id == this.favoriteMovies.find(id => id == movie._id));
-  anyFavMovies: boolean = (this.favMovies.length != 0);
+  favoriteMovies: any[] = [];
+  anyFavMovies: boolean = (this.favoriteMovies.length != 0);
+  birthdayEmpty: boolean = (this.birthday === '');
+  mybreakpoint: number = 0;
+  small: boolean = (window.innerWidth <= 600);
+  medium: boolean = (window.innerWidth >= 601 && window.innerWidth <= 900);
+  large: boolean = (window.innerWidth >= 901 && window.innerWidth <= 1400);
 
   ngOnInit(): void {
     this.getUserInfo();
-    this.getMovies();
+    this.mybreakpoint = (this.small) ? 1 : (this.medium) ? 2 : (this.large) ? 3 : 4;
   }
 
-  openDeleteDialog(): void {
-    this.dialog.open(DeleteConfirmationComponent, {
-      //Container css
-      width: '370px'
-    });
+  handleGridSize(event: any): any {
+    this.mybreakpoint = (
+      event.target.innerWidth <= 600) ? 1 :
+      (event.target.innerWidth >= 601 && event.target.innerWidth <= 900) ? 2 :
+        (event.target.innerWidth >= 901 && event.target.innerWidth <= 1400) ? 3 : 4;
+  }
+
+  openEditDialog(): void {
+    this.dialog.open(EditProfileComponent, {
+      data: {
+        username: this.username,
+        email: this.email,
+        birthday: this.birthday
+      },
+      width: 'auto',
+      maxHeight: '520px'
+    })
   }
 
   getUserInfo(): void {
     this.fetchApiData.getProfile().subscribe((resp: any) => {
-      this.userData.username = resp.username;
-      this.userData.email = resp.email;
-      this.userData.birthday = (resp.birthday !== null) ? (resp.birthday).slice(0, 10) : '';
-      this.favoriteMovies = resp.favoriteMovies;
-      return (this.userData, this.favoriteMovies);
+      this.username = resp.username;
+      this.email = resp.email;
+      this.birthday = (resp.birthday !== null) ? (resp.birthday).slice(0, 10) : '';
+      this.favoriteMoviesId = resp.favoriteMovies;
+      this.getMovies();
+      return (this.username, this.email, this.birthday, this.favoriteMoviesId);
     })
-  }
-
-  updateUser(): void {
-    if (this.userData.username !== '' && this.userData.password !== '' && this.userData.email !== '') {
-      this.fetchApiData.updateProfile({
-        username: this.userData.username,
-        password: this.userData.password,
-        email: this.userData.email,
-        birthday: this.userData.birthday,
-      }).subscribe((result) => {
-        this.snackBar.open('Your profile was updated successfully', 'OK', {
-          duration: 2000
-        });
-      }, (result) => {
-        this.snackBar.open(result, 'OK', {
-          duration: 2000
-        });
-      });
-    } else {
-      this.snackBar.open('Please enter your username, password, and email before updating', 'OK', {
-        duration: 3000
-      });
-    }
   }
 
   getMovies(): void {
     //accessing function 'getAllMovies' from class fetchApiData
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
+      this.favoriteMovies = this.movies.map((movie) => {
+        if (movie._id === this.favoriteMovies.find((m) => m === movie._id)) {
+          return movie
+        }
+      });
       return this.movies;
+    });
+  }
+
+  removeFavoriteMovie(event: any, movieID: number): any {
+    this.fetchApiData.removeFavoriteMovie(movieID).subscribe((result) => {
+      this.getUserInfo();
+    }, (result) => {
+      this.snackBar.open(result, 'OK', {
+        duration: 2000
+      });
     });
   }
 

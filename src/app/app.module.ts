@@ -24,6 +24,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
 import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
     MovieCardComponent,
     WelcomePageComponent,
     ProfileComponent,
-    DeleteConfirmationComponent
+    DeleteConfirmationComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

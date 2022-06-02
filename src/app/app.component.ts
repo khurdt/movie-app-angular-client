@@ -23,10 +23,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectedTab = "movies";
     this.username = localStorage.getItem('user');
     this.token = localStorage.getItem('token');
     if (!this.username || !this.token) {
       this.Router.navigate(['welcome']);
+    } else if (this.username && this.token) {
+      this.Router.navigate(['movies']);
     }
   }
 

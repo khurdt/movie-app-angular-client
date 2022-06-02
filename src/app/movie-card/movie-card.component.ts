@@ -1,5 +1,6 @@
 import { Component, OnInit, VERSION, ViewChild } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-movie-card',
@@ -8,9 +9,13 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 })
 export class MovieCardComponent implements OnInit {
   //importing class 'fetchApiData' from the imported file FetchApiDataService
-  constructor(public fetchApiData: FetchApiDataService) { }
+  constructor(
+    public fetchApiData: FetchApiDataService,
+    public snackBar: MatSnackBar,
+  ) { }
 
   movies: any[] = [];
+  favoriteMovies: any[] = [];
   mybreakpoint: number = 0;
   small: boolean = (window.innerWidth <= 600);
   medium: boolean = (window.innerWidth >= 601 && window.innerWidth <= 900);
@@ -19,6 +24,7 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovies();
+    this.getUserInfo();
     this.mybreakpoint = (this.small) ? 1 : (this.medium) ? 2 : (this.large) ? 3 : 4;
   }
 
@@ -37,4 +43,39 @@ export class MovieCardComponent implements OnInit {
       return this.movies;
     });
   }
+
+  getUserInfo(): void {
+    this.fetchApiData.getProfile().subscribe((resp: any) => {
+      this.favoriteMovies = resp.favoriteMovies;
+      return (this.favoriteMovies);
+    })
+  }
+
+  handleFavoriteMovie(event: any, movieID: number): any {
+    console.log(movieID);
+    if (this.favoriteMovies.includes(movieID)) {
+      this.fetchApiData.removeFavoriteMovie(movieID).subscribe((result) => {
+        this.snackBar.open('movie was removed from favorite list!', 'OK', {
+          duration: 2000
+        });
+        this.getUserInfo();
+      }, (result) => {
+        this.snackBar.open(result, 'OK', {
+          duration: 2000
+        });
+      });
+    } else {
+      this.fetchApiData.addFavoriteMovie(movieID).subscribe((result) => {
+        this.snackBar.open('movie was added to favorite list!', 'OK', {
+          duration: 2000
+        });
+        this.getUserInfo();
+      }, (result) => {
+        this.snackBar.open(result, 'OK', {
+          duration: 2000
+        });
+      });
+    }
+  }
+
 }

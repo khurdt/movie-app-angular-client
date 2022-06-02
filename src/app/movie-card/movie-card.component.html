@@ -17,9 +17,12 @@
                     <button mat-raised-button color="primary" class="see-more-button">
                         See More
                     </button>
-                    <button mat-icon-button style="margin-left: 20px;">
-                        <mat-icon>
+                    <button mat-icon-button style="margin-left: 20px;" (click)="handleFavoriteMovie($event, movie._id)">
+                        <mat-icon *ngIf="!favoriteMovies.includes(movie._id)">
                             favorite_border
+                        </mat-icon>
+                        <mat-icon *ngIf="favoriteMovies.includes(movie._id)" style="color: red;">
+                            favorite
                         </mat-icon>
                     </button>
                 </mat-card-actions>
