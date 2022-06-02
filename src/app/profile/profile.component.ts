@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   favoriteMoviesId: any[] = [];
   movies: any[] = [];
   favoriteMovies: any[] = [];
-  anyFavMovies: boolean = (this.favoriteMovies.length != 0);
+  anyFavMovies: boolean = (this.favoriteMovies.length !== 0);
   birthdayEmpty: boolean = (this.birthday === '');
   mybreakpoint: number = 0;
   small: boolean = (window.innerWidth <= 600);
@@ -68,9 +68,9 @@ export class ProfileComponent implements OnInit {
     //accessing function 'getAllMovies' from class fetchApiData
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      this.favoriteMovies = this.movies.map((movie) => {
-        if (movie._id === this.favoriteMovies.find((m) => m === movie._id)) {
-          return movie
+      this.movies.forEach((movie) => {
+        if (movie._id === this.favoriteMoviesId.find((m) => m === movie._id)) {
+          this.favoriteMovies.push(movie);
         }
       });
       return this.movies;
@@ -79,7 +79,8 @@ export class ProfileComponent implements OnInit {
 
   removeFavoriteMovie(event: any, movieID: number): any {
     this.fetchApiData.removeFavoriteMovie(movieID).subscribe((result) => {
-      this.getUserInfo();
+      this.favoriteMovies = [];
+      this.ngOnInit();
     }, (result) => {
       this.snackBar.open(result, 'OK', {
         duration: 2000
