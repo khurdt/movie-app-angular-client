@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -13,8 +13,11 @@ export class DeleteConfirmationComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<DeleteConfirmationComponent>,
+    private dialogAll: MatDialog,
     public snackBar: MatSnackBar,
-    public Router: Router,) { }
+    public Router: Router,
+  ) { }
+
   username = localStorage.getItem('user');
 
   ngOnInit(): void {
@@ -25,19 +28,15 @@ export class DeleteConfirmationComponent implements OnInit {
   }
 
   deleteUser(): void {
-    this.fetchApiData.deleteProfile().subscribe((resp: any) => {
-      this.snackBar.open('goodbye', 'OK', {
-        duration: 2000
-      });
-      this.Router.navigate(['welcome']);
-      console.log(resp);
-      this.dialogRef.close();
-    }, (resp) => {
-      this.snackBar.open(resp, 'OK', {
-        duration: 2000
-      });
-      console.log(resp);
-    });
+    this.dialogAll.closeAll();
+    this.snackBar.open('your account has been deleted', 'OK', {
+      duration: 2000
+    })
+    this.Router.navigate(['welcome']).then(() => {
+      this.fetchApiData.deleteProfile().subscribe((resp) => { console.log(resp) }, (resp) => { console.log(resp) });
+    }).then(() => {
+      localStorage.clear();
+    })
   }
 
 }

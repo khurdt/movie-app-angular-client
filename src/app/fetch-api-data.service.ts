@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError, map } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://kh-movie-app.herokuapp.com/';
@@ -12,17 +13,24 @@ const apiUrl = 'https://kh-movie-app.herokuapp.com/';
 export class FetchApiDataService {
   // Inject the HttpClient module to the constructor params
   // This will provide HttpClient to the entire class, making it available via this.http
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    public snackBar: MatSnackBar,
+  ) { }
+
+  movieData: any = {};
 
   //Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
     return this.http.post(apiUrl + 'users', userDetails).pipe(
       catchError(this.handleError)
     );
   }
 
   public userLogIn(userCredentials: any): Observable<any> {
+    this.snackBar.open('Attempting to Login...', 'OK', {
+      duration: 2000
+    });
     return this.http.post(apiUrl + 'login', userCredentials).pipe(
       map(this.extractResponseUserToken),
       catchError(this.handleError)
@@ -109,18 +117,16 @@ export class FetchApiDataService {
     );
   }
 
-  public deleteProfile(): Observable<any> {
+  deleteProfile(): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
-    return this.http.delete(apiUrl + `users/${username}`, {
-      headers: new HttpHeaders(
-        {
+    return this.http
+      .delete(apiUrl + `users/${username}`, {
+        headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
-        }
-      )
-    }).pipe(map(this.extractResponseData),
-      catchError(this.handleError)
-    );
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   public addFavoriteMovie(movieID: number): Observable<any> {
@@ -145,12 +151,21 @@ export class FetchApiDataService {
           Authorization: 'Bearer ' + token,
         }
       )
-    }).pipe(catchError(this.handleError));
+    }).pipe(map(this.extractResponseData),
+      catchError(this.handleError));
+  }
+
+  public storeSingleMovieData(movie: any): any {
+    this.movieData = movie;
+    return this.movieData;
+  }
+
+  public getSingleMovieData(): void {
+    return this.movieData
   }
 
   private extractResponseUserToken(res: any): any {
     const data = res;
-    console.log(data);
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', data.user.username);
     return data || {};

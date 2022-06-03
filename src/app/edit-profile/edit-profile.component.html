@@ -1,4 +1,4 @@
-<mat-card class="profile-input-card" style="width: 280px;">
+<mat-card style="height: fit-content;margin: auto;">
   <mat-card-header class="log-reg-title">
     <mat-card-title>Edit Profile</mat-card-title>
   </mat-card-header>
@@ -33,7 +33,12 @@
       <button mat-raised-button (click)="openDeleteDialog()" color="error">Delete Profile</button>
     </div>
     <div class="log-reg-button">
-      <button mat-raised-button (click)="updateUser()" color="primary">Update</button>
+      <button mat-raised-button (click)="updateUser()" color="primary">
+        <mat-icon style="color: white;">
+          update
+        </mat-icon>
+        Update
+      </button>
     </div>
   </mat-card-actions>
 </mat-card>

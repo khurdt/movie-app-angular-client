@@ -25,10 +25,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
 import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { MovieViewComponent } from './movie-view/movie-view.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
+  { path: 'movie-view', component: MovieViewComponent },
   { path: 'user', component: ProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' }
 ];
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
     WelcomePageComponent,
     ProfileComponent,
     DeleteConfirmationComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    MovieViewComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,9 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    AppComponent,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

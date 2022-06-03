@@ -32,12 +32,9 @@ export class UserLoginFormComponent implements OnInit {
       password: this.loginData.password
     }).subscribe((result) => {
       this.dialogRef.close();
-      this.snackBar.open('Sucessfully Logged In...', 'OK', {
-        duration: 3000
-      });
       this.Router.navigate(['movies']);
     }, (result) => {
-      this.snackBar.open(result, 'OK', {
+      this.snackBar.open('Username or Password is incorrect', 'OK', {
         duration: 2000
       });
     });

@@ -20,26 +20,15 @@ export class ProfileComponent implements OnInit {
   email: string = '';
   birthday: any = '';
   favoriteMoviesId: any[] = [];
-  movies: any[] = [];
   favoriteMovies: any[] = [];
-  anyFavMovies: boolean = (this.favoriteMovies.length !== 0);
+  anyFavMovies: boolean = (this.favoriteMovies.length === 0);
   birthdayEmpty: boolean = (this.birthday === '');
-  mybreakpoint: number = 0;
-  small: boolean = (window.innerWidth <= 600);
-  medium: boolean = (window.innerWidth >= 601 && window.innerWidth <= 900);
-  large: boolean = (window.innerWidth >= 901 && window.innerWidth <= 1400);
 
   ngOnInit(): void {
     this.getUserInfo();
-    this.mybreakpoint = (this.small) ? 1 : (this.medium) ? 2 : (this.large) ? 3 : 4;
+    this.anyFavMovies = (this.favoriteMovies.length === 0);
   }
 
-  handleGridSize(event: any): any {
-    this.mybreakpoint = (
-      event.target.innerWidth <= 600) ? 1 :
-      (event.target.innerWidth >= 601 && event.target.innerWidth <= 900) ? 2 :
-        (event.target.innerWidth >= 901 && event.target.innerWidth <= 1400) ? 3 : 4;
-  }
 
   openEditDialog(): void {
     this.dialog.open(EditProfileComponent, {
@@ -48,8 +37,7 @@ export class ProfileComponent implements OnInit {
         email: this.email,
         birthday: this.birthday
       },
-      width: 'auto',
-      maxHeight: '520px'
+      panelClass: 'custom-dialog-container'
     })
   }
 
@@ -67,20 +55,20 @@ export class ProfileComponent implements OnInit {
   getMovies(): void {
     //accessing function 'getAllMovies' from class fetchApiData
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
-      this.movies.forEach((movie) => {
-        if (movie._id === this.favoriteMoviesId.find((m) => m === movie._id)) {
-          this.favoriteMovies.push(movie);
-        }
+      const movies = resp;
+      this.favoriteMovies = movies.filter((movie: any) => {
+        return this.favoriteMoviesId.some((id) => {
+          return id === movie._id;
+        });
       });
-      return this.movies;
+      this.anyFavMovies = (this.favoriteMovies.length === 0)
+      return this.favoriteMovies;
     });
   }
 
   removeFavoriteMovie(event: any, movieID: number): any {
     this.fetchApiData.removeFavoriteMovie(movieID).subscribe((result) => {
-      this.favoriteMovies = [];
-      this.ngOnInit();
+      this.getUserInfo();
     }, (result) => {
       this.snackBar.open(result, 'OK', {
         duration: 2000

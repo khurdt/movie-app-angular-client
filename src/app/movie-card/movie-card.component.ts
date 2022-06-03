@@ -1,6 +1,8 @@
 import { Component, OnInit, VERSION, ViewChild } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppComponent } from '../app.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
@@ -12,6 +14,8 @@ export class MovieCardComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
+    public App: AppComponent,
+    private Router: Router,
   ) { }
 
   movies: any[] = [];
@@ -25,7 +29,13 @@ export class MovieCardComponent implements OnInit {
   ngOnInit(): void {
     this.getMovies();
     this.getUserInfo();
+    this.App.ngOnInit();
     this.mybreakpoint = (this.small) ? 1 : (this.medium) ? 2 : (this.large) ? 3 : 4;
+  }
+
+  goToMovieView(event: any, movie: any): any {
+    this.fetchApiData.storeSingleMovieData(movie);
+    this.Router.navigate(['movie-view']);
   }
 
   handleGridSize(event: any): any {
@@ -56,7 +66,7 @@ export class MovieCardComponent implements OnInit {
     if (this.favoriteMovies.includes(movieID)) {
       this.fetchApiData.removeFavoriteMovie(movieID).subscribe((result) => {
         this.snackBar.open('movie was removed from favorite list!', 'OK', {
-          duration: 2000
+          duration: 1200
         });
         this.getUserInfo();
       }, (result) => {
@@ -67,7 +77,7 @@ export class MovieCardComponent implements OnInit {
     } else {
       this.fetchApiData.addFavoriteMovie(movieID).subscribe((result) => {
         this.snackBar.open('movie was added to favorite list!', 'OK', {
-          duration: 2000
+          duration: 1200
         });
         this.getUserInfo();
       }, (result) => {

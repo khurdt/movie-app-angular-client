@@ -17,14 +17,13 @@ export class WelcomePageComponent implements OnInit {
   //this is the function that will open the dialog when the signup button is clicked
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
-      //Container css
-      width: '370px'
+      panelClass: 'custom-dialog-container'
     });
   }
 
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
-      width: '370px'
+      panelClass: 'custom-dialog-container'
     });
   }
 }

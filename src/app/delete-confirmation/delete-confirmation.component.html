@@ -1,13 +1,18 @@
-<mat-card style="height: fit-content;margin: auto;">
+<mat-card style="height: fit-content;margin: auto;" class=".mat-dialog-container">
     <mat-card-header class="log-reg-title">
-        <mat-card-title>Are you sure you want to delete {{username}}?</mat-card-title>
+        <mat-card-title>Delete {{username}}?</mat-card-title>
     </mat-card-header>
     <mat-card-actions style="display: flex;justify-content:space-between;">
         <div class="log-reg-button">
             <button mat-raised-button (click)="closeDialog()" color="primary">No Thanks</button>
         </div>
         <div class="log-reg-button">
-            <button mat-raised-button (click)="deleteUser()" color="error">Absolutely</button>
+            <button mat-raised-button (click)="deleteUser()" color="error">
+                <mat-icon style="color: red;">
+                    delete_forever
+                </mat-icon>
+                Yes!
+            </button>
         </div>
     </mat-card-actions>
 </mat-card>

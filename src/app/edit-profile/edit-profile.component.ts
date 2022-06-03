@@ -35,9 +35,12 @@ export class EditProfileComponent implements OnInit {
 
   openDeleteDialog(): void {
     this.dialog.open(DeleteConfirmationComponent, {
-      //Container css
-      width: '370px'
+      panelClass: 'custom-dialog-container'
     });
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 
   updateUser(): void {

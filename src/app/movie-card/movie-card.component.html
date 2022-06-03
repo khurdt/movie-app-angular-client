@@ -6,16 +6,20 @@
         <mat-card class="mat-card" style="box-shadow: 3px 3px 10px 5px rgba(27, 27, 27, 0.3);">
             <mat-card-content>
                 <mat-card-header style="min-height: 50px; margin-top: 10px;">
-                    <mat-card-title style="text-align: left;">
+                    <mat-card-title style="text-align: left;cursor: pointer;" (click)="goToMovieView($event, movie)">
                         <div class="card-title">{{movie.title}}</div>
                     </mat-card-title>
                 </mat-card-header>
-                <img class="card-img" src={{movie.imagePath}} />
+                <img class="card-img" src={{movie.imagePath}} (click)="goToMovieView($event, movie)"
+                    style="cursor: pointer;" />
                 <mat-card-subtitle style="margin: 0px;text-align: center;">Directed by: {{movie.director.name}}
                 </mat-card-subtitle>
-                <mat-card-actions style="display: flex; margin-left:50px;">
-                    <button mat-raised-button color="primary" class="see-more-button">
-                        See More
+                <mat-card-actions style="display: flex; justify-content: center; align-content: center;">
+                    <button mat-raised-button color="primary" class="see-more-button"
+                        (click)="goToMovieView($event, movie)">
+                        <mat-icon style="color: white;">
+                            read_more
+                        </mat-icon>
                     </button>
                     <button mat-icon-button style="margin-left: 20px;" (click)="handleFavoriteMovie($event, movie._id)">
                         <mat-icon *ngIf="!favoriteMovies.includes(movie._id)">
