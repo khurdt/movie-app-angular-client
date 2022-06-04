@@ -19,6 +19,7 @@ export class FetchApiDataService {
   ) { }
 
   movieData: any = {};
+  object: any = {};
 
   //Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
@@ -157,11 +158,18 @@ export class FetchApiDataService {
 
   public storeSingleMovieData(movie: any): any {
     this.movieData = movie;
-    return this.movieData;
   }
 
   public getSingleMovieData(): void {
     return this.movieData
+  }
+
+  public storeSingleObject(object: any): any {
+    this.object = object;
+  }
+
+  public getSingleObject(): void {
+    return this.object
   }
 
   private extractResponseUserToken(res: any): any {

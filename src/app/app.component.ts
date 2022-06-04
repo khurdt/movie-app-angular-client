@@ -15,7 +15,9 @@ export class AppComponent implements OnInit {
   largeScreen: boolean = (window.innerWidth >= 701);
   checkTabMovie: boolean = (window.location.href.includes('movies'));
   checkTabUser: boolean = (window.location.href.includes('user'));
-  selectedTab: string = (this.checkTabMovie) ? "movies" : (this.checkTabUser) ? "user" : "movies";
+  checkTabGenres: boolean = (window.location.href.includes('genres'));
+  checkTabDirectors: boolean = (window.location.href.includes('directors'));
+  selectedTab: string = (this.checkTabMovie) ? 'movies' : (this.checkTabUser) ? 'user' : (this.checkTabGenres) ? 'genres' : (this.checkTabDirectors) ? 'directors' : 'movies';
 
   makeActive(tab: string) {
     this.selectedTab = tab;

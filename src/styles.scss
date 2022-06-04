@@ -112,18 +112,24 @@ body {
 .grid-card {
   width: 400px;
   height: 500px;
-  margin-top: 30px;
-  margin-bottom: 30px;
 }
 
-.mat-card {
+.movie-card {
   width: 250px;
   height: 500px;
   padding-bottom: 40px;
   margin-bottom: 100px;
   margin-right: 10px;
   margin-left: 10px;
-  background-color: #dbdada;
+}
+
+.genre-card {
+  width: 200px;
+  height: 200px;
+}
+
+.mat-card {
+  background-color: rgba($color: #dbdaf8, $alpha: 1.0);
 }
 
 .card-title {

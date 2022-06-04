@@ -1,0 +1,24 @@
+<mat-form-field style="display: flex; justify-content: center; margin-top: 20px;">
+  <input matInput [(ngModel)]="searchInquiry" (keydown)="filterMovies($event)" placeholder="search"
+    style="width: 400px;" type="text" />
+</mat-form-field>
+<mat-grid-list class="movie-grid" [cols]="mybreakpoint" rowHeight="150px" (window:resize)="handleGridSize($event)">
+  <mat-grid-tile *ngFor="let genre of filteredGenres; let i=index;">
+    <mat-card
+      style="box-shadow: 3px 3px 5px 0px rgba(27, 27, 27, 0.3); width: 150px; height: fit-content; display: flex; justify-content: center;align-content: center;">
+      <mat-card-content>
+        <mat-card-title style="text-align: left;cursor: pointer;" (click)="goToGenreView($event, genre)">
+          <div class="card-title">{{genre}}</div>
+        </mat-card-title>
+        <!-- <img width="100" height="150" style="margin-left:7px;" src={{movie.imagePath}} /> -->
+        <mat-card-actions style="display: flex;justify-content: center;">
+          <button mat-raised-button color="primary" class="see-more-button" (click)="goToGenreView($event, genre)">
+            <mat-icon style="color: white;">
+              read_more
+            </mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

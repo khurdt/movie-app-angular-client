@@ -18,19 +18,27 @@ export class MovieCardComponent implements OnInit {
     private Router: Router,
   ) { }
 
+  searchInquiry: string = '';
+  filteredMovies: any[] = [];
   movies: any[] = [];
   favoriteMovies: any[] = [];
   mybreakpoint: number = 0;
   small: boolean = (window.innerWidth <= 600);
   medium: boolean = (window.innerWidth >= 601 && window.innerWidth <= 900);
   large: boolean = (window.innerWidth >= 901 && window.innerWidth <= 1400);
-  searchInquiry: string = '';
 
   ngOnInit(): void {
     this.getMovies();
     this.getUserInfo();
     this.App.ngOnInit();
     this.mybreakpoint = (this.small) ? 1 : (this.medium) ? 2 : (this.large) ? 3 : 4;
+  }
+
+  filterMovies(event: any): any {
+    this.filteredMovies = (event.target.value === '') ?
+      this.movies : (event.target.value !== '') ?
+        this.movies.filter((movie) => movie.title.toLowerCase().includes(event.target.value.toLowerCase())) : this.movies;
+    return this.filteredMovies;
   }
 
   goToMovieView(event: any, movie: any): any {
@@ -49,8 +57,9 @@ export class MovieCardComponent implements OnInit {
     //accessing function 'getAllMovies' from class fetchApiData
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
+      this.filteredMovies = this.movies;
       console.log(this.movies);
-      return this.movies;
+      return (this.movies, this.filteredMovies);
     });
   }
 

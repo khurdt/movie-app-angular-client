@@ -26,11 +26,19 @@ import { ProfileComponent } from './profile/profile.component';
 import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MovieViewComponent } from './movie-view/movie-view.component';
+import { GenreListComponent } from './genre-list/genre-list.component';
+import { DirectorListComponent } from './director-list/director-list.component';
+import { GenreViewComponent } from './genre-view/genre-view.component';
+import { DirectorViewComponent } from './director-view/director-view.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
+  { path: 'genres', component: GenreListComponent },
+  { path: 'directors', component: DirectorListComponent },
   { path: 'movie-view', component: MovieViewComponent },
+  { path: 'genre-view', component: GenreViewComponent },
+  { path: 'director-view', component: DirectorViewComponent },
   { path: 'user', component: ProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' }
 ];
@@ -45,7 +53,11 @@ const appRoutes: Routes = [
     ProfileComponent,
     DeleteConfirmationComponent,
     EditProfileComponent,
-    MovieViewComponent
+    MovieViewComponent,
+    GenreListComponent,
+    DirectorListComponent,
+    GenreViewComponent,
+    DirectorViewComponent
   ],
   imports: [
     BrowserModule,

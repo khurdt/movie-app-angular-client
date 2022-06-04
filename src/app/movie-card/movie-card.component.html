@@ -1,9 +1,10 @@
 <mat-form-field style="display: flex; justify-content: center; margin-top: 20px;">
-    <input matInput [(ngModel)]="searchInquiry" placeholder="search" style="width: 400px;" type="text" />
+    <input matInput [(ngModel)]="searchInquiry" (keydown)="filterMovies($event)" placeholder="search"
+        style="width: 400px;" type="text" />
 </mat-form-field>
 <mat-grid-list class="movie-grid" [cols]="mybreakpoint" rowHeight="650px" (window:resize)="handleGridSize($event)">
-    <mat-grid-tile class="grid-card" *ngFor="let movie of movies; let i=index;">
-        <mat-card class="mat-card" style="box-shadow: 3px 3px 10px 5px rgba(27, 27, 27, 0.3);">
+    <mat-grid-tile class="grid-card" *ngFor="let movie of filteredMovies; let i=index;">
+        <mat-card class="movie-card" style="box-shadow: 3px 3px 5px 0px rgba(27, 27, 27, 0.3);">
             <mat-card-content>
                 <mat-card-header style="min-height: 50px; margin-top: 10px;">
                     <mat-card-title style="text-align: left;cursor: pointer;" (click)="goToMovieView($event, movie)">
