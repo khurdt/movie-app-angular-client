@@ -1,12 +1,36 @@
 <div style="display: flex;justify-content: center;align-content: center;margin: 10px;">
   <mat-card style="padding: 0px; width: 700px;height: 100vh;">
-    <img mat-card-image
+    <img mat-card-image class="movie-view-image"
       style="max-width: 700px; height: '26vh'; object-fit: 'cover'; object-position: '0 0';margin: auto;"
       src={{movie.imagePath}} />
-    <mat-card-title style="text-align: left;margin: 10px;">
-      <div class="card-title">{{movie.title}}</div>
-    </mat-card-title>
-    <mat-card-actions>
-    </mat-card-actions>
+    <div style="display:flex;">
+      <button mat-icon-button (click)="handleFavoriteMovie($event, movie._id)">
+        <mat-icon *ngIf="!favoriteMovies.includes(movie._id)">
+          favorite_border
+        </mat-icon>
+        <mat-icon *ngIf="favoriteMovies.includes(movie._id)" style="color: red;">
+          favorite
+        </mat-icon>
+      </button>
+      <mat-card-title style="text-align: left;margin: 10px;display: flex;">
+        <div class="card-title">{{movie.title}}</div>
+      </mat-card-title>
+    </div>
+    <p style="margin: 10px;">{{movie.description}}</p>
+    <hr />
+    <div class="movie-view-genre-director-grid">
+      <div style="display: flex;margin: auto;">
+        <mat-card-title style="font-size: 15px; margin: 10px;">Director:</mat-card-title>
+        <button mat-raised-button color="primary" (click)="goToDirectorView()">
+          {{movie.director.name}}
+        </button>
+      </div>
+      <div style="display: flex;margin: auto;">
+        <mat-card-title style="font-size: 15px; margin: 10px;">Genre:</mat-card-title>
+        <button mat-raised-button color="primary" (click)="goToGenreView()">
+          {{movie.genre.name}}
+        </button>
+      </div>
+    </div>
   </mat-card>
 </div>

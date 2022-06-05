@@ -13,6 +13,7 @@ export class GenreViewComponent implements OnInit {
     public fetchApiData: FetchApiDataService) { }
 
   genre: any = {};
+  movies: any[] = [];
 
   ngOnInit(): void {
     this.getSingleGenre();
@@ -20,5 +21,19 @@ export class GenreViewComponent implements OnInit {
 
   getSingleGenre(): void {
     this.genre = this.fetchApiData.getSingleObject()
+    this.getMovies();
+  }
+
+  getMovies(): void {
+    //accessing function 'getAllMovies' from class fetchApiData
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp.filter((m: any) => m.genre.name === this.genre.name);
+      return (this.movies);
+    });
+  }
+
+  goToMovieView(event: any, movie: any): any {
+    this.fetchApiData.storeSingleMovieData(movie);
+    this.Router.navigate(['movie-view']);
   }
 }

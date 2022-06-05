@@ -3,6 +3,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar,
+    public Router: Router) { }
 
 
   username: string = '';
@@ -27,6 +29,11 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getUserInfo();
     this.anyFavMovies = (this.favoriteMovies.length === 0);
+  }
+
+  goToMovieView(event: any, movie: any): any {
+    this.fetchApiData.storeSingleMovieData(movie);
+    this.Router.navigate(['movie-view']);
   }
 
 

@@ -23,13 +23,14 @@
     <h2 style="text-align: center;margin: 20px;">Favorite Movies</h2>
     <div class="favorite-movies-grid">
         <mat-card
-            style="box-shadow: 3px 3px 5px 0px rgba(27, 27, 27, 0.3); width: 115px; height: fit-content; display: flex; justify-content: center;align-content: center;"
+            style="box-shadow: 3px 3px 5px 0px rgba(27, 27, 27, 0.3); width: 115px; height: fit-content; display: flex; justify-content: center;align-content: center; margin-bottom: 10px;"
             *ngFor="let movie of favoriteMovies; let i=index;">
             <mat-card-content>
                 <mat-card-subtitle style="margin: 0px;text-align: center;min-height: 40px;">
                     {{movie.title}}
                 </mat-card-subtitle>
-                <img width="100" height="150" style="margin-left:7px;" src={{movie.imagePath}} />
+                <img width="100" height="150" style="margin-left:7px;cursor:pointer;" src={{movie.imagePath}}
+                    (click)="goToMovieView($event, movie)" />
                 <mat-card-actions style="display: flex;justify-content: center;">
                     <button mat-raised-button color="error" class="see-more-button"
                         (click)="removeFavoriteMovie($event, movie._id)">

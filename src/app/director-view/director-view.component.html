@@ -1,11 +1,36 @@
 <div style="display: flex;justify-content: center;align-content: center;margin: 10px;">
-  <mat-card style="padding: 0px; width: 700px;height: 100vh;">
-    <img mat-card-image
-      style="max-width: 700px; height: '20vh'; object-fit: 'cover'; object-position: '0 0';margin: auto;" />
-    <mat-card-title style="text-align: left;margin: 10px;">
-      <div class="card-title">{{director.name}}</div>
-    </mat-card-title>
-    <mat-card-actions>
-    </mat-card-actions>
+  <mat-card style="padding: 0px; width: 700px;min-height: 100vh;">
+    <div class="genre-director-card">
+      <mat-card-title>
+        <div style="text-align: center;margin-top: 60px;" class="card-title">{{director.name}}</div>
+        <mat-card-subtitle style="text-align: center;font-size: 11px;margin: 10px;">Born: {{director.birth}} <span
+            style="margin-left: 10px;">Death: {{director.death}}</span>
+        </mat-card-subtitle>
+      </mat-card-title>
+      <img mat-card-image
+        style="max-width: 150px; height: '200px';margin-left: auto; margin-right: 5px; margin-top: 5px;"
+        src="{{director.imagePath}}" />
+    </div>
+    <p style="margin: 10px;">{{director.description}}</p>
+    <hr />
+    <mat-card-title style="font-size: 15px;text-align: center;margin: 10px;">{{director.name}} Movies</mat-card-title>
+    <div class="favorite-movies-grid">
+      <mat-card class="genre-director-card-movies" *ngFor="let movie of movies; let i=index;">
+        <mat-card-content>
+          <mat-card-subtitle style="margin: 0px;text-align: center;min-height: 40px;">
+            {{movie.title}}
+          </mat-card-subtitle>
+          <img width="100" height="150" style="margin-left:7px;cursor:pointer;" src={{movie.imagePath}}
+            (click)="goToMovieView($event, movie)" />
+          <mat-card-actions style="display: flex;justify-content: center;">
+            <button mat-raised-button color="primary" class="see-more-button" (click)="goToMovieView($event, movie)">
+              <mat-icon style="color: white;">
+                read_more
+              </mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </mat-card>
 </div>

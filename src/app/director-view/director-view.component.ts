@@ -14,6 +14,7 @@ export class DirectorViewComponent implements OnInit {
     public fetchApiData: FetchApiDataService) { }
 
   director: any = {};
+  movies: any[] = [];
 
   ngOnInit(): void {
     this.getSingleDirector();
@@ -21,6 +22,20 @@ export class DirectorViewComponent implements OnInit {
 
   getSingleDirector(): void {
     this.director = this.fetchApiData.getSingleObject();
+    this.getMovies();
+  }
+
+  getMovies(): void {
+    //accessing function 'getAllMovies' from class fetchApiData
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp.filter((m: any) => m.director.name === this.director.name);
+      return (this.movies);
+    });
+  }
+
+  goToMovieView(event: any, movie: any): any {
+    this.fetchApiData.storeSingleMovieData(movie);
+    this.Router.navigate(['movie-view']);
   }
 }
 
