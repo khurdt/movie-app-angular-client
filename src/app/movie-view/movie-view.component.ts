@@ -20,6 +20,7 @@ export class MovieViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSingleMovieData();
+    this.getUserInfo();
   }
 
   goToGenreView(): any {
