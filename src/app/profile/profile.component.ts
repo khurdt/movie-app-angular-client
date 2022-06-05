@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   favoriteMoviesId: any[] = [];
   favoriteMovies: any[] = [];
   anyFavMovies: boolean = (this.favoriteMovies.length === 0);
-  birthdayEmpty: boolean = (this.birthday === '');
+  birthdayEmpty: boolean = (this.birthday === undefined || this.birthday === null);
 
   ngOnInit(): void {
     this.getUserInfo();

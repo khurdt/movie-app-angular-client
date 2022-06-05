@@ -1,7 +1,7 @@
 <div style="display: flex;justify-content: center;align-content: center;margin: 10px;">
   <mat-card style="padding: 0px; width: 700px;height: 100vh;">
     <img mat-card-image class="movie-view-image"
-      style="max-width: 700px; height: '26vh'; object-fit: 'cover'; object-position: '0 0';margin: auto;"
+      style="max-width: 700px; height: '26vh'; object-fit: 'cover'; object-position: '0 0';margin: auto; width: -webkit-fill-available;"
       src={{movie.imagePath}} />
     <div style="display:flex;">
       <button mat-icon-button (click)="handleFavoriteMovie($event, movie._id)">
@@ -19,13 +19,13 @@
     <p style="margin: 10px;">{{movie.description}}</p>
     <hr />
     <div class="movie-view-genre-director-grid">
-      <div style="display: flex;margin: auto;">
+      <div style="display: flex;margin: auto;padding: 10px">
         <mat-card-title style="font-size: 15px; margin: 10px;">Director:</mat-card-title>
         <button mat-raised-button color="primary" (click)="goToDirectorView()">
           {{movie.director.name}}
         </button>
       </div>
-      <div style="display: flex;margin: auto;">
+      <div style="display: flex;margin: auto;padding: 10px">
         <mat-card-title style="font-size: 15px; margin: 10px;">Genre:</mat-card-title>
         <button mat-raised-button color="primary" (click)="goToGenreView()">
           {{movie.genre.name}}

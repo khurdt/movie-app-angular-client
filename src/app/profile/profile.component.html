@@ -1,4 +1,4 @@
-<div class="profile-container">
+<div class="profile-container" style="width: -webkit-fill-available;">
     <mat-card class="profile-input-card">
         <mat-card-header class="log-reg-title">
             <mat-card-title>Profile</mat-card-title>
@@ -21,7 +21,7 @@
         </mat-card-actions>
     </mat-card>
     <h2 style="text-align: center;margin: 20px;">Favorite Movies</h2>
-    <div class="favorite-movies-grid">
+    <div class="favorite-movies-grid" style="width: -webkit-fill-available;">
         <mat-card
             style="box-shadow: 3px 3px 5px 0px rgba(27, 27, 27, 0.3); width: 115px; height: fit-content; display: flex; justify-content: center;align-content: center; margin-bottom: 10px;"
             *ngFor="let movie of favoriteMovies; let i=index;">
