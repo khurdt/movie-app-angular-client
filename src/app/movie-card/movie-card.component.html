@@ -15,21 +15,30 @@
                     style="cursor: pointer;" />
                 <mat-card-subtitle style="margin: 0px;text-align: center;">Directed by: {{movie.director.name}}
                 </mat-card-subtitle>
-                <mat-card-actions style="display: flex; justify-content: center; align-content: center;">
-                    <button mat-raised-button color="primary" class="see-more-button"
-                        (click)="goToMovieView($event, movie)">
-                        <mat-icon style="color: white;">
-                            read_more
-                        </mat-icon>
-                    </button>
-                    <button mat-icon-button style="margin-left: 20px;" (click)="handleFavoriteMovie($event, movie._id)">
-                        <mat-icon *ngIf="!favoriteMovies.includes(movie._id)">
-                            favorite_border
-                        </mat-icon>
-                        <mat-icon *ngIf="favoriteMovies.includes(movie._id)" style="color: red;">
-                            favorite
-                        </mat-icon>
-                    </button>
+                <mat-card-actions>
+                    <div style="display: flex; justify-content: center; align-content: center;">
+                        <button mat-raised-button color="primary" class="see-more-button"
+                            (click)="goToMovieView($event, movie)">
+                            <mat-icon style="color: white;">
+                                read_more
+                            </mat-icon>
+                        </button>
+                        <button mat-icon-button style="margin-left: 20px;"
+                            (click)="handleFavoriteMovie($event, movie._id)">
+                            <mat-icon *ngIf="!favoriteMovies.includes(movie._id)">
+                                favorite_border
+                            </mat-icon>
+                            <mat-icon *ngIf="favoriteMovies.includes(movie._id)" style="color: red;">
+                                favorite
+                            </mat-icon>
+                        </button>
+                    </div>
+                    <mat-card-subtitle *ngIf="movie.likes > 1"
+                        style="margin-top: 10px;text-align: right;font-size: 12px;">
+                        {{movie.likes}} people like this movie </mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="movie.likes === 1"
+                        style="margin-top: 10px;text-align: right;font-size: 12px;">
+                        {{movie.likes}} person likes this movie </mat-card-subtitle>
                 </mat-card-actions>
             </mat-card-content>
         </mat-card>

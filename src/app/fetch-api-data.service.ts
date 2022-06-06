@@ -51,6 +51,19 @@ export class FetchApiDataService {
     );
   }
 
+  public getAllUsers(): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + 'users', {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        }
+      )
+    }).pipe(map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
   public getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies', {

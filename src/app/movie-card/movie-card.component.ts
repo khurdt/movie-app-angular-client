@@ -58,9 +58,34 @@ export class MovieCardComponent implements OnInit {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       this.filteredMovies = this.movies;
-      console.log(this.movies);
+      this.getAllUsers();
       return (this.movies, this.filteredMovies);
+    }, (resp) => {
+      console.log(resp);
     });
+  }
+
+  getAllUsers(): void {
+    this.fetchApiData.getAllUsers().subscribe((resp: any) => {
+      let users = resp;
+      let arrayOfAllFavorites = users.reduce((accumulator: any, obj: any) => [...accumulator, ...obj.favoriteMovies], []);
+      this.filteredMovies.map((m) => {
+        m.likes = undefined;
+        arrayOfAllFavorites.forEach((fav: any) => {
+          if (fav === m._id) {
+            if (m.likes === undefined || m.likes === null) {
+              m.likes = 1
+            } else if (m.likes >= 1) {
+              m.likes++;
+            }
+          }
+        })
+      });
+      console.log(this.filteredMovies)
+      return this.filteredMovies;
+    }, (resp: any) => {
+      console.log(resp);
+    })
   }
 
   getUserInfo(): void {
@@ -78,6 +103,7 @@ export class MovieCardComponent implements OnInit {
           duration: 1200
         });
         this.getUserInfo();
+        this.getAllUsers();
       }, (result) => {
         this.snackBar.open(result, 'OK', {
           duration: 2000
@@ -89,6 +115,7 @@ export class MovieCardComponent implements OnInit {
           duration: 1200
         });
         this.getUserInfo();
+        this.getAllUsers();
       }, (result) => {
         this.snackBar.open(result, 'OK', {
           duration: 2000
