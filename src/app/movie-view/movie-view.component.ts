@@ -20,7 +20,6 @@ export class MovieViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSingleMovieData();
-    this.getUserInfo();
   }
 
   goToGenreView(): any {
@@ -34,13 +33,29 @@ export class MovieViewComponent implements OnInit {
   }
 
   getSingleMovieData(): void {
-    this.movie = this.fetchApiData.getSingleMovieData()
+    this.movie = this.fetchApiData.getSingleMovieData();
+    this.getAllUsers();
   }
 
-  getUserInfo(): void {
-    this.fetchApiData.getProfile().subscribe((resp: any) => {
-      this.favoriteMovies = resp.favoriteMovies;
-      return (this.favoriteMovies);
+  getAllUsers(): void {
+    this.fetchApiData.getAllUsers().subscribe((resp: any) => {
+      let users = resp;
+      let currentUser = users.find((user: any) => { return user.username === (localStorage.getItem('user')) });
+      this.favoriteMovies = currentUser.favoriteMovies;
+      let arrayOfAllFavorites = users.reduce((accumulator: any, obj: any) => [...accumulator, ...obj.favoriteMovies], []);
+      this.movie.likes = undefined;
+      arrayOfAllFavorites.forEach((fav: any) => {
+        if (fav === this.movie._id) {
+          if (this.movie.likes === undefined) {
+            this.movie.likes = 1
+          } else if (this.movie.likes >= 1) {
+            this.movie.likes++;
+          }
+        }
+      });
+      return (this.movie, this.favoriteMovies);
+    }, (resp: any) => {
+      console.log(resp);
     })
   }
 
@@ -51,7 +66,7 @@ export class MovieViewComponent implements OnInit {
         this.snackBar.open('movie was removed from favorite list!', 'OK', {
           duration: 1200
         });
-        this.getUserInfo();
+        this.getAllUsers();
       }, (result) => {
         this.snackBar.open(result, 'OK', {
           duration: 2000
@@ -62,7 +77,7 @@ export class MovieViewComponent implements OnInit {
         this.snackBar.open('movie was added to favorite list!', 'OK', {
           duration: 1200
         });
-        this.getUserInfo();
+        this.getAllUsers();
       }, (result) => {
         this.snackBar.open(result, 'OK', {
           duration: 2000

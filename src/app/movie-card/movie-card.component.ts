@@ -29,7 +29,6 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovies();
-    this.getUserInfo();
     this.App.ngOnInit();
     this.mybreakpoint = (this.small) ? 1 : (this.medium) ? 2 : (this.large) ? 3 : 4;
   }
@@ -68,12 +67,14 @@ export class MovieCardComponent implements OnInit {
   getAllUsers(): void {
     this.fetchApiData.getAllUsers().subscribe((resp: any) => {
       let users = resp;
+      let currentUser = users.find((user: any) => { return user.username === (localStorage.getItem('user')) });
+      this.favoriteMovies = currentUser.favoriteMovies;
       let arrayOfAllFavorites = users.reduce((accumulator: any, obj: any) => [...accumulator, ...obj.favoriteMovies], []);
       this.filteredMovies.map((m) => {
         m.likes = undefined;
         arrayOfAllFavorites.forEach((fav: any) => {
           if (fav === m._id) {
-            if (m.likes === undefined || m.likes === null) {
+            if (m.likes === undefined) {
               m.likes = 1
             } else if (m.likes >= 1) {
               m.likes++;
@@ -81,17 +82,9 @@ export class MovieCardComponent implements OnInit {
           }
         })
       });
-      console.log(this.filteredMovies)
-      return this.filteredMovies;
+      return (this.filteredMovies, this.favoriteMovies);
     }, (resp: any) => {
       console.log(resp);
-    })
-  }
-
-  getUserInfo(): void {
-    this.fetchApiData.getProfile().subscribe((resp: any) => {
-      this.favoriteMovies = resp.favoriteMovies;
-      return (this.favoriteMovies);
     })
   }
 
@@ -102,7 +95,7 @@ export class MovieCardComponent implements OnInit {
         this.snackBar.open('movie was removed from favorite list!', 'OK', {
           duration: 1200
         });
-        this.getUserInfo();
+        // this.getUserInfo();
         this.getAllUsers();
       }, (result) => {
         this.snackBar.open(result, 'OK', {
@@ -114,7 +107,7 @@ export class MovieCardComponent implements OnInit {
         this.snackBar.open('movie was added to favorite list!', 'OK', {
           duration: 1200
         });
-        this.getUserInfo();
+        // this.getUserInfo();
         this.getAllUsers();
       }, (result) => {
         this.snackBar.open(result, 'OK', {
