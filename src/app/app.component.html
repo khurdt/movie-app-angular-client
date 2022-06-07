@@ -9,7 +9,7 @@
                 <mat-menu class="menu-bar" #menu="matMenu">
                     <button class="menu-bar" mat-menu-item routerLink="/movies" (click)="makeActive('movies');"
                         [ngClass]="{'active': (selectedTab === 'movies') }">
-                        <mat-icon>movie</mat-icon>
+                        <mat-icon>local_movies</mat-icon>
                         <span>movies</span>
                     </button>
                     <button class="menu-bar" mat-menu-item routerLink="/genres" (click)="makeActive('genres');"
@@ -35,17 +35,17 @@
                     <mat-icon>local_movies</mat-icon>
                     <span style="margin-left: 5px;">movies</span>
                 </button>
-                <button mat-icon-button style="margin-left: 20px;width: 100px;" routerLink="/genres"
+                <button mat-icon-button style="margin-left: 20px; width: 100px;" routerLink="/genres"
                     (click)="makeActive('genres');" [ngClass]="{'active': (selectedTab === 'genres') }">
                     <mat-icon>mood</mat-icon>
                     <span style="margin-left: 5px;">genres</span>
                 </button>
-                <button mat-icon-button style="margin-left: 20px;width: 100px;" routerLink="/directors"
+                <button mat-icon-button style="margin-left: 20px; width: 100px;" routerLink="/directors"
                     (click)="makeActive('directors');" [ngClass]="{'active': (selectedTab === 'directors') }">
                     <mat-icon>movie</mat-icon>
                     <span style="margin-left: 5px;">directors</span>
                 </button>
-                <button mat-icon-button style="margin-left: 20px;width: 100px;" routerLink="/user"
+                <button mat-icon-button style="margin-left: 20px; width: 100px;" routerLink="/user"
                     [ngClass]="{'active': (selectedTab === 'user') }" (click)="makeActive('user');">
                     <mat-icon>person</mat-icon>
                     <span style=" margin-left: 5px;">{{username}}</span>
