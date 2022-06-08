@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "create": "ng generate component",
     "deploy": "ng deploy --base-href=/movie-app-angular-client/",
-    "test": "ng test"
+    "test": "ng test",
+    "typedoc": "npx typedoc src/index.ts"
   },
   "private": true,
   "dependencies": {

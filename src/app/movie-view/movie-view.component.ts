@@ -21,22 +21,28 @@ export class MovieViewComponent implements OnInit {
   ngOnInit(): void {
     this.getSingleMovieData();
   }
-
+  /**if user clicks on genre name, store genre object, and navigate to genre view */
   goToGenreView(): any {
     this.fetchApiData.storeSingleObject(this.movie.genre);
     this.Router.navigate(['genre-view']);
   }
-
+  /**if user clicks on director name, store director object, and navigate to director view */
   goToDirectorView(): any {
     this.fetchApiData.storeSingleObject(this.movie.director);
     this.Router.navigate(['director-view']);
   }
-
+  /**gets store movie object from fetchApiData service file */
   getSingleMovieData(): void {
     this.movie = this.fetchApiData.getSingleMovieData();
     this.getAllUsers();
   }
-
+  /**getting individual user from here in order to not make another http request
+   * getting All Users in order to display the total amount of likes of each movie,
+   * reduced users arrays to one array of all favorite movie id's, 
+   * then mapped through movies to see if they match any ID arrayOfAllFavorites,
+   * if there is any repeats, then the count of likes increases,
+   * everytime this is called, the likes are wiped and recounted,
+   */
   getAllUsers(): void {
     this.fetchApiData.getAllUsers().subscribe((resp: any) => {
       let users = resp;
@@ -59,7 +65,8 @@ export class MovieViewComponent implements OnInit {
     })
   }
 
-  /**handle favorite movies */
+  /**when user clicks heart icon, 
+ * it will trigger the POST or DELETE function whether the movieID is in their favorite Array already or not*/
   handleFavoriteMovie(event: any, movieID: number): any {
     console.log(movieID);
     if (this.favoriteMovies.includes(movieID)) {

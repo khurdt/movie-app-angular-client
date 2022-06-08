@@ -1,6 +1,7 @@
 <mat-card style="height: fit-content;margin: auto;">
   <mat-card-header class="log-reg-title">
     <mat-card-title>Sign Up!</mat-card-title>
+    <mat-icon (click)="closeDialog()" color="primary" style="cursor: pointer;">close</mat-icon>
   </mat-card-header>
   <mat-card-content>
     <form class="log-reg-form">
@@ -21,7 +22,10 @@
   </mat-card-content>
   <mat-card-actions>
     <div class="log-reg-button">
-      <button mat-raised-button (click)="registerUser()" color="primary">Sign Up</button>
+      <button mat-raised-button (click)="registerUser()" color="primary">
+        <mat-icon>how_to_reg</mat-icon>
+        <span>Register</span>
+      </button>
     </div>
   </mat-card-actions>
 </mat-card>

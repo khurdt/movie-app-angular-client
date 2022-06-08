@@ -10,17 +10,17 @@
                     <button class="menu-bar" mat-menu-item routerLink="/movies" (click)="makeActive('movies');"
                         [ngClass]="{'active': (selectedTab === 'movies') }">
                         <mat-icon>local_movies</mat-icon>
-                        <span>movies</span>
+                        <span>Movies</span>
                     </button>
                     <button class="menu-bar" mat-menu-item routerLink="/genres" (click)="makeActive('genres');"
                         [ngClass]="{'active': (selectedTab === 'genres') }">
                         <mat-icon>mood</mat-icon>
-                        <span>genres</span>
+                        <span>Genres</span>
                     </button>
                     <button class="menu-bar" mat-menu-item routerLink="/directors" (click)="makeActive('directors');"
                         [ngClass]="{'active': (selectedTab === 'directors') }">
                         <mat-icon>movie</mat-icon>
-                        <span>directors</span>
+                        <span>Directors</span>
                     </button>
                     <button class="menu-bar" mat-menu-item routerLink="/user" (click)="makeActive('user');"
                         [ngClass]="{'active': (selectedTab === 'user') }" (click)="makeActive('user');">
@@ -33,17 +33,17 @@
                 <button style="width: 100px;" mat-icon-button routerLink="/movies" (click)="makeActive('movies');"
                     [ngClass]="{'active': (selectedTab === 'movies') }">
                     <mat-icon>local_movies</mat-icon>
-                    <span style="margin-left: 5px;">movies</span>
+                    <span style="margin-left: 5px;">Movies</span>
                 </button>
                 <button mat-icon-button style="margin-left: 20px; width: 100px;" routerLink="/genres"
                     (click)="makeActive('genres');" [ngClass]="{'active': (selectedTab === 'genres') }">
                     <mat-icon>mood</mat-icon>
-                    <span style="margin-left: 5px;">genres</span>
+                    <span style="margin-left: 5px;">Genres</span>
                 </button>
                 <button mat-icon-button style="margin-left: 20px; width: 100px;" routerLink="/directors"
                     (click)="makeActive('directors');" [ngClass]="{'active': (selectedTab === 'directors') }">
                     <mat-icon>movie</mat-icon>
-                    <span style="margin-left: 5px;">directors</span>
+                    <span style="margin-left: 5px;">Directors</span>
                 </button>
                 <button mat-icon-button style="margin-left: 20px; width: 100px;" routerLink="/user"
                     [ngClass]="{'active': (selectedTab === 'user') }" (click)="makeActive('user');">
@@ -54,7 +54,7 @@
             <div style="margin-left: auto; width: 100px;">
                 <button mat-icon-button style="width: 100px;" (click)="logout()">
                     <mat-icon>logout</mat-icon>
-                    <span style=" margin-left: 5px;">logout</span>
+                    <span style=" margin-left: 5px;">Logout</span>
                 </button>
             </div>
         </mat-toolbar-row>

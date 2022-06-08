@@ -20,12 +20,19 @@ export class UserLoginFormComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  /**gets inputted data from html template */
   @Input() loginData = {
     username: '',
     password: ''
   }
+  /**closes login modal dialog */
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 
+  /**if returning user presses log in button,
+   * and the log in successfull, then navigate to movies
+   */
   userLogin(): void {
     this.fetchApiData.userLogIn({
       username: this.loginData.username,

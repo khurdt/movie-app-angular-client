@@ -31,12 +31,7 @@ export class ProfileComponent implements OnInit {
     this.anyFavMovies = (this.favoriteMovies.length === 0);
   }
 
-  goToMovieView(event: any, movie: any): any {
-    this.fetchApiData.storeSingleMovieData(movie);
-    this.Router.navigate(['movie-view']);
-  }
-
-
+  /**when user clicks manage account button, open angular material modal dialog for updating user info */
   openEditDialog(): void {
     this.dialog.open(EditProfileComponent, {
       data: {
@@ -47,7 +42,7 @@ export class ProfileComponent implements OnInit {
       panelClass: 'custom-dialog-container'
     })
   }
-
+  /**GET request of logged in user info to display then getsMovies() */
   getUserInfo(): void {
     this.fetchApiData.getProfile().subscribe((resp: any) => {
       this.username = resp.username;
@@ -56,11 +51,15 @@ export class ProfileComponent implements OnInit {
       this.favoriteMoviesId = resp.favoriteMovies;
       this.getMovies();
       return (this.username, this.email, this.birthday, this.favoriteMoviesId);
+    }, (resp) => {
+      console.log(resp);
+      this.snackBar.open(resp, 'OK', {
+        duration: 2000
+      });
     })
   }
-
+  /**Gets all movies to display the movies that match users favorite movie IDs */
   getMovies(): void {
-    //accessing function 'getAllMovies' from class fetchApiData
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       const movies = resp;
       this.favoriteMovies = movies.filter((movie: any) => {
@@ -70,9 +69,17 @@ export class ProfileComponent implements OnInit {
       });
       this.anyFavMovies = (this.favoriteMovies.length === 0)
       return this.favoriteMovies;
+    }, (resp) => {
+      console.log(resp);
+      this.snackBar.open(resp, 'OK', {
+        duration: 2000
+      });
     });
   }
-
+  /**when user clicks delete button on movie card,
+   * remove movieID from favorite Movie Array,
+   * then call getUserInfo() in order to refresh their list of favorite movies
+   */
   removeFavoriteMovie(event: any, movieID: number): any {
     this.fetchApiData.removeFavoriteMovie(movieID).subscribe((result) => {
       this.getUserInfo();
@@ -81,6 +88,14 @@ export class ProfileComponent implements OnInit {
         duration: 2000
       });
     });
+  }
+
+  /**when user clicks on picture of a movie card,
+   * then store movie object and navigate to movie view
+   */
+  goToMovieView(event: any, movie: any): any {
+    this.fetchApiData.storeSingleMovieData(movie);
+    this.Router.navigate(['movie-view']);
   }
 
 }

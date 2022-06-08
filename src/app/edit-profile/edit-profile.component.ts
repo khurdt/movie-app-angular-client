@@ -16,6 +16,7 @@ export class EditProfileComponent implements OnInit {
     public snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<EditProfileComponent>,
 
+    /**gets injected data from profile component */
     @Inject(MAT_DIALOG_DATA)
     public data: {
       username: string,
@@ -23,6 +24,7 @@ export class EditProfileComponent implements OnInit {
       birthday: any,
     }) { }
 
+  /**gets inputted data from html template */
   @Input() userData = {
     username: this.data.username,
     password: '',
@@ -30,19 +32,22 @@ export class EditProfileComponent implements OnInit {
     birthday: this.data.birthday,
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
+  /**opens angular material modal dialog for delete confirmation of account */
   openDeleteDialog(): void {
     this.dialog.open(DeleteConfirmationComponent, {
       panelClass: 'custom-dialog-container'
     });
   }
-
+  /**closes angular material modal dialog for delete confirmation of account */
   closeDialog(): void {
     this.dialogRef.close();
   }
-
+  /**function to update user info,
+   * if necessary inputs are blank, notify user,
+   * otherwise send PUT request with data, birthday is always optional
+   */
   updateUser(): void {
     if (this.userData.username !== '' && this.userData.password !== '' && this.userData.email !== '') {
       this.fetchApiData.updateProfile({

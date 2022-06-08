@@ -1,5 +1,5 @@
 <mat-form-field style="display: flex; justify-content: center; margin-top: 20px;">
-  <input matInput [(ngModel)]="searchInquiry" (keydown)="filterMovies($event)" placeholder="search"
+  <input matInput [(ngModel)]="searchInquiry" (keydown)="filterDirectors($event)" placeholder="search"
     style="width: 400px;" type="text" />
 </mat-form-field>
 <mat-grid-list class="movie-grid" [cols]="mybreakpoint" rowHeight="150px" (window:resize)="handleGridSize($event)">

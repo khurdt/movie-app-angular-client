@@ -2,6 +2,27 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7.
 
+# What am I looking at??
+
+An application that displays movies from a movie database, and allows you to see information about each movie, its genre and director. One can create an account and collect their personal favorite movies and delete them.
+
+# Objective
+
+Using Angular, build the client-side for an application called myFlix based on
+its existing server-side code (REST API and database), with supporting
+documentation.
+
+# User Stories
+
+● As a user, I want to be able to receive information on movies, directors, and genres so that I
+can learn more about movies I’ve watched or am interested in.
+● As a user, I want to be able to see all movies that correspond to a genre or a director.
+● As a user, I want to be able to search movies, genres, and directors.
+● As a user, I want to be able to see a list of movies, a list of genres, and a list of directors.
+● As a user, I want to be able to create a profile so I can save data about my favorite movies.
+● As a user, I want to see the total number of anonymous likes across all users for each movie.
+● As a user, I want to delete my account if I so wish.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

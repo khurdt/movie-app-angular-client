@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-registration-form.component.scss']
 })
 export class UserRegistrationFormComponent implements OnInit {
-
+  /**gets inputted data from html template */
   @Input() userData = {
     username: '',
     password: '',
@@ -33,8 +33,15 @@ export class UserRegistrationFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void { }
+  /**close registration modal dialog */
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 
-  // This is the function responsible for sending the form inputs to the backend
+  /**when user presses register button,
+   * creates user in users collection in database,
+   * then automatically logs user in by calling userLogin()
+   */
   registerUser(): void {
     this.fetchApiData.userRegistration({
       username: this.userData.username,

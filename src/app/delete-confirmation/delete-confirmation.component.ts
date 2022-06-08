@@ -23,17 +23,24 @@ export class DeleteConfirmationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**function to close angular material modal dialog */
   closeDialog(): void {
     this.dialogRef.close();
   }
-
+  /**first closes all open modals, then notifies user of deletion, 
+   * then routes user back to welcome page, 
+   * then deletes user account entirely, if not done in this order, the http request fails. */
   deleteUser(): void {
     this.dialogAll.closeAll();
     this.snackBar.open('your account has been deleted', 'OK', {
       duration: 2000
     })
     this.Router.navigate(['welcome']).then(() => {
-      this.fetchApiData.deleteProfile().subscribe((resp) => { console.log(resp) }, (resp) => { console.log(resp) });
+      this.fetchApiData.deleteProfile().subscribe((resp) => {
+        console.log(resp)
+      }, (resp) => {
+        console.log(resp)
+      });
     }).then(() => {
       localStorage.clear();
     })

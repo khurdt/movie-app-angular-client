@@ -14,13 +14,13 @@ export class WelcomePageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //this is the function that will open the dialog when the signup button is clicked
+  /**this is the function that will open the register modal dialog when the signup button is clicked*/
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
       panelClass: 'custom-dialog-container'
     });
   }
-
+  /**this is the function that will open the login modal dialog when the login button is clicked*/
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
       panelClass: 'custom-dialog-container'
