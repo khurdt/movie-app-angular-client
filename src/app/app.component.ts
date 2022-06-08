@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   constructor(public Router: Router,) { }
 
+  title = 'angularFlix-client';
   username: any = localStorage.getItem('user');
   token: any = localStorage.getItem('token');
   smallScreen: boolean = (window.innerWidth <= 700);

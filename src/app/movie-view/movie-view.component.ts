@@ -59,6 +59,7 @@ export class MovieViewComponent implements OnInit {
     })
   }
 
+  /**handle favorite movies */
   handleFavoriteMovie(event: any, movieID: number): any {
     console.log(movieID);
     if (this.favoriteMovies.includes(movieID)) {
