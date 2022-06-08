@@ -18,10 +18,15 @@ documentation.
 can learn more about movies I’ve watched or am interested in.
 <br><br>
 ● As a user, I want to be able to see all movies that correspond to a genre or a director.
+<br><br>
 ● As a user, I want to be able to search movies, genres, and directors.
+<br><br>
 ● As a user, I want to be able to see a list of movies, a list of genres, and a list of directors.
+<br><br>
 ● As a user, I want to be able to create a profile so I can save data about my favorite movies.
+<br><br>
 ● As a user, I want to see the total number of anonymous likes across all users for each movie.
+<br><br>
 ● As a user, I want to delete my account if I so wish.
 
 ## Development server
