@@ -16,6 +16,7 @@ documentation.
 
 ● As a user, I want to be able to receive information on movies, directors, and genres so that I
 can learn more about movies I’ve watched or am interested in.
+<br><br>
 ● As a user, I want to be able to see all movies that correspond to a genre or a director.
 ● As a user, I want to be able to search movies, genres, and directors.
 ● As a user, I want to be able to see a list of movies, a list of genres, and a list of directors.
