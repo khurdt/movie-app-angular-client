@@ -47,11 +47,11 @@
 </mat-grid-list>
 <div *ngIf="small" class="favorite-movies-grid" style="width: -webkit-fill-available;">
     <mat-card class="genre-director-card-movies" style="background-color: #dbdaf8;"
-        *ngFor="let movie of movies; let i=index;">
+        *ngFor="let movie of filteredMovies; let i=index;">
         <mat-card-content>
-            <mat-card-subtitle style="margin: 0px;text-align: center;min-height: 40px;">
+            <mat-card-title style="margin: 0px;text-align: center;min-height: 40px;font-size: 12px;">
                 {{movie.title}}
-            </mat-card-subtitle>
+            </mat-card-title>
             <img width="100" height="150" style="margin-left:7px;cursor:pointer;" src={{movie.imagePath}}
                 (click)="goToMovieView($event, movie)" />
             <mat-card-actions style="display: flex;justify-content: center;">
